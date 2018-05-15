@@ -1,0 +1,10 @@
+﻿@model Kodisoft.DAL.Places
+@{
+    string placeName = Model.TableId.ToString() + Model.PlaceName;
+}
+
+<a href="#" class="brand-logo center black-text">@placeName Place</a>
+<ul id="nav-mobile" class="left hide-on-med-and-down">
+    @*<li><a href="#">Back</a></li>*@
+    <li>@Html.ActionLink("Back", "Table", "Home", new { id = Model.TableId }, new { @class= "waves-effect waves-teal btn-flat" })</li>
+</ul>

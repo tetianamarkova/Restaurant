@@ -1,0 +1,14 @@
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\bin\Debug\Kodisoft.DAL.dll.config
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\bin\Debug\Kodisoft.DAL.dll
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\bin\Debug\Kodisoft.DAL.pdb
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\bin\Debug\EntityFramework.dll
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\bin\Debug\EntityFramework.xml
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\bin\Debug\ru\EntityFramework.resources.dll
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\obj\Debug\Kodisoft.DAL.dll
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\obj\Debug\Kodisoft.DAL.pdb
+D:\ASP.NET MVC\Kodisoft_upd\Kodisoft(+Auth)\KodisoftTest\Kodisoft.DAL\obj\Debug\Kodisoft.DAL.csprojResolveAssemblyReference.cache

@@ -1,0 +1,53 @@
+﻿@model Kodisoft.DAL.Orders
+
+<div class="container">
+    <div class="row">
+        <h5 class="red-text text-lighten-2">Order Details:</h5>
+    </div>
+    <div class="row">
+        <div class="col s5">
+            <h6 class="red-text text-lighten-2"><span class="black-text">Order Id: </span> @Model.OrderId</h6>
+        </div>
+
+        <div class="col s7">
+            <h6 class="red-text text-lighten-2"> <span class="black-text">Status: </span>@Model.StatusList.StatusName</h6>
+        </div>
+    </div>
+    <div class="row">
+        <ul class="collection">
+            <li class="collection-item">
+                <div class="row">
+                    <div class="col s6">
+                        Item Name
+                    </div>
+                    <div class="col s3">
+                        Item Amount
+                    </div>
+                    <div class="col s3">
+                        Total Price
+                    </div>
+                </div>
+            </li>
+    @foreach (var item in Model.OrderItem)
+            {
+                double price = item.ItemAmount * item.MenuItems.Price;
+        <li class="collection-item">
+            <div class="row">
+                <div class="col s6">
+                    @item.MenuItems.ItemName
+                </div>
+                <div class="col s3">
+                    @item.ItemAmount
+                </div>
+                <div class="col s3">
+                    @price
+                </div>
+            </div>
+        </li>
+    }
+    </ul>
+</div>
+
+</div>
+
+

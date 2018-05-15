@@ -1,0 +1,49 @@
+﻿@model KodisoftTest.Models.TableCoordinatesViewModel
+
+<form class="col s12" method="post" action="/Home/EditCoordinates">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col s6">
+                <p>Select the table:</p>
+                @Html.DropDownListFor(model => model.SelectedTable, new SelectList(Model.Tables, "TableId", "TableName"), new { id = "dropdownTables" })
+            </div>
+            <div class="col s3">
+                <p>Edit X-coordinate*</p>                
+                <input id="posX" name="positionX" type="text" value="@Model.Tables[0].PositionX" />
+                <label>*From 1px till 859px</label>
+            </div>
+            <div class=" col s3">
+                <p>Edit Y-coordinate*</p>               
+                <input id="posY" name="positionY" type="text" value="@Model.Tables[0].PositionY" />
+                <label>*From 1px till 489px</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" class="waves-effect waves-light btn" value="Change" />
+        </div>
+
+    </div>
+
+</form>
+
+<script>
+    $('#dropdownTables').change(function () {
+        var Id = $(this).val();
+        var urlforX = '@Html.Raw(@Url.Action("getPositionX", "Home", new { id = "first"}))';
+        urlforX = urlforX.replace("first", Id);
+
+        var urlforY = '@Html.Raw(@Url.Action("getPositionY", "Home", new { id = "first"}))';
+        urlforY = urlforY.replace("first", Id);
+
+        $.get(urlforX, function (data) {
+            $("#posX").attr('value', data);
+        });
+
+        $.get(urlforY, function (data) {
+            $("#posY").attr('value', data);
+        });
+    });
+</script>

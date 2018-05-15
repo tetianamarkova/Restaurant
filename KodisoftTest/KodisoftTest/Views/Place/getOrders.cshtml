@@ -1,0 +1,114 @@
+﻿@model KodisoftTest.Models.EditOrderViewModel
+
+@foreach (var order in Model.orders)
+{
+    Model.orderId = order.OrderId;
+    <form class="col s12" method="post" action="/Place/EditOrder">
+        <div class="container">
+            <input type="hidden" value="@Model.placeId" name="placeId" />
+            <div class="row">
+                <div class="col s6">
+                    Order Id
+                </div>
+                <div class="col s6">
+                    @Html.DisplayFor(model => model.orderId)
+                    <input type="hidden" id="orderId" value="@Model.orderId" name="orderId" order-id="@Model.orderId" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s6">
+                    Order Status
+                </div>
+                <div class="col s6">
+                    @Html.DropDownListFor(model => model.SelectedStatus, new SelectList(Model.statusList, "StatusId", "StatusName"))
+
+                </div>
+            </div>
+
+            <div class="row" id="titleAddNewItems">
+                <p id="textForNoOrders" class="red-text text-lighten-2">Add items to the order</p>
+            </div>
+
+            <div class="row">
+                <div class="col s10">
+                    @Html.DropDownListFor(model => model.SelectedMenuItem, new SelectList(Model.Menu, "ItemId", "ItemName"), new {id="dropdownMenuItems", data_id = Model.orderId})
+                </div>
+                <div class="input-field col s2">
+                    <a id="addItems" class="btn-floating btn-large waves-effect waves-light">+</a>
+                </div>
+            </div>
+
+            <div class="row" id="orderDetails">
+                <p id="textForNoOrders" class="red-text text-lighten-2">Order Items:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="bodyTable">
+                        @foreach (var item in order.OrderItem)
+                            {
+                                double sum_price = item.MenuItems.Price * item.ItemAmount;
+                            <tr>
+                                <td>@item.MenuItems.ItemName</td>
+                                <td>@item.ItemAmount</td>
+                                <td>@sum_price</td>
+                            </tr>
+                            }
+                        
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col s4">
+                    <input class="waves-effect waves-light btn" type="submit" name="submitButton" value="Void" />
+                </div>
+                <div class="col s4">
+                    <input class="waves-effect waves-light btn" type="submit" name="submitButton" value="Pay" />
+                </div>
+                <div class="col s4">
+                    <input class="waves-effect waves-light btn" type="submit" name="submitButton" value="Save" />
+                </div>
+            </div>
+        </div>
+    </form>
+}
+<script>
+		$(document).ready(function() {
+			$('select').material_select();
+		});
+</script>
+
+<script>
+    $('#dropdownMenuItems').change(function () {
+
+        console.log($(this).val());
+        });
+</script>
+
+<script>
+    $('#addItems').click(function () {
+
+        var orderId = $('#orderId').attr('order-id');
+        var itemId = $('#dropdownMenuItems').val();
+        var url = '@Html.Raw(@Url.Action("PlaceOpenedOrders", "Place", new { selectedValue = "item", orderId = "variable" }))';
+
+        url = url.replace("item", itemId);
+        url = url.replace("variable", orderId);
+        
+
+            $.get(url, function (data) {
+
+                $("#orderDetails").html(data);
+                $('#titleAddNewItems').hide();
+            });
+        });
+</script>
+

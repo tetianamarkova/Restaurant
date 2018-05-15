@@ -1,0 +1,166 @@
+﻿@*@model KodisoftTest.Models.PlaceDetailsModel*@
+@model Kodisoft.DAL.Places
+
+@{
+    var openedOrder = Model.Orders.ToList().Find(x => x.OrderStatus == 1 || x.OrderStatus == 2 || x.OrderStatus == 3);
+    if (openedOrder != null)
+    {
+        switch (openedOrder.OrderStatus)
+        {
+            case 1:
+                {
+                    string button_id = Model.PlaceId + "-place-id";
+                <div class="col s6">
+                    <div class="card red darken-2">
+                        <div class="card-content white-text text-darken-4">
+                            <p class="card-title">
+                                Place:
+                                <button class="btn-floating btn-large waves-effect waves-light deep-purple lighten-3 black-text" id=@button_id place-id="@Model.PlaceId">@Model.Tables.TableName@Model.PlaceName</button>
+                            </p>
+                            <br/>
+                            <p>Opened orders:</p>
+                        </div>
+                        
+                        <ul class="collection">
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s4">
+                                        Order Status:
+                                    </div>
+                                    <div class="col s8">
+                                        @openedOrder.StatusList.StatusName
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s4">
+                                        Order Date:
+                                    </div>
+                                    <div class="col s8">
+                                        @openedOrder.OrderDate
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                    break;
+                }
+            case 2:
+                {
+                    string button_id = Model.PlaceId + "-place-id";
+                <div class="col s6">
+                    <div class="card amber darken-3">
+                        <div class="card-content white-text text-darken-4">
+                            <p class="card-title">
+                                Place:
+                                <button class="btn-floating btn-large waves-effect waves-light deep-purple lighten-3 black-text" id=@button_id place-id="@Model.PlaceId">@Model.Tables.TableName@Model.PlaceName</button>
+                            </p>
+                            <br />
+                            <p>Opened orders:</p>
+                        </div>
+                        <ul class="collection">
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s4">
+                                        Order Status:
+                                    </div>
+                                    <div class="col s8">
+                                        @openedOrder.StatusList.StatusName
+                                    </div>
+                                </div>
+                             </li>
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s4">
+                                        Order Date:
+                                    </div>
+                                    <div class="col s8">
+                                        @openedOrder.OrderDate
+                                    </div>
+                                </div>
+                            </li>
+                           </ul>
+                    </div>
+                </div>
+                    break;
+                }
+            case 3:
+                {
+                    string button_id = Model.PlaceId + "-place-id";
+                <div class="col s6">
+                    <div class="card green lighten-1">
+                        <div class="card-content white-text text-darken-4">
+                            <p class="card-title">
+                                Place:
+                                <button class="btn-floating btn-large waves-effect waves-light deep-purple lighten-3 black-text" id=@button_id place-id="@Model.PlaceId">@Model.Tables.TableName@Model.PlaceName</button>
+                            </p>
+                            <br />
+                            <p>Opened orders:</p>
+                        </div>
+                        <ul class="collection">
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s4">
+                                        Order Status:
+                                    </div>
+                                    <div class="col s8">
+                                        @openedOrder.StatusList.StatusName
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s4">
+                                        Order Date:
+                                    </div>
+                                    <div class="col s8">
+                                        @openedOrder.OrderDate
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                    break;
+                }
+            default:
+                {
+                    string button_id = Model.PlaceId + "-place-id";
+                <div class="col s6">
+                    <div class="card indigo lighten-1">
+                        <div class="card-content white-text">
+                            <p class="card-title">
+                                Place:
+                                <button class="btn-floating btn-large waves-effect waves-light deep-purple lighten-3 black-text" id=@button_id place-id="@Model.PlaceId">@Model.Tables.TableName@Model.PlaceName</button>
+                            </p>
+                            <br/><p>No opened orders</p>
+                        </div>
+                        <br />
+
+                    </div>
+                </div>
+                    break;
+                }
+        }
+    }
+    else
+    {
+        string button_id = Model.PlaceId + "-place-id";
+        <div class="col s6">
+            <div class="card indigo lighten-1">
+                <div class="card-content white-text">
+                    <p class="card-title">
+                        Place:
+                        <button class="btn-floating btn-large waves-effect waves-light deep-purple lighten-3 black-text" id=@button_id place-id="@Model.PlaceId">@Model.Tables.TableName@Model.PlaceName</button>
+                    </p>
+                </div>
+                <p>No opened orders</p><br /><br />
+
+            </div>
+        </div>
+    }
+}
+
+   

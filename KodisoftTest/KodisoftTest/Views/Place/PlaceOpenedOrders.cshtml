@@ -1,0 +1,50 @@
+﻿@model KodisoftTest.Models.OpenedOrdersForPlaceViewModel
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+
+    <tbody id="bodyTable">
+        @if (Model.updatedOrderItems != null)
+        {
+            int i = -1;
+            foreach (var item in Model.updatedOrderItems)
+            {
+                i++;
+                double price;
+                string name;
+                
+                if (item.MenuItems == null)
+                {
+                    price = Model.menu.ToList().Find(x => x.ItemId == item.ItemId).Price;
+                    name = Model.menu.ToList().Find(x => x.ItemId == item.ItemId).ItemName;
+                }
+                else
+                {
+                    price = item.MenuItems.Price;
+                    name = item.MenuItems.ItemName;
+                }
+
+            <tr>
+                <td>@name
+                    <input type="hidden" name="updatedOrderItems[@i].ItemId" value="@item.ItemId"/>
+                </td>
+                <td>@item.ItemAmount
+                </td>
+                <td>@{
+                    price *= item.ItemAmount;
+                }
+                    @price
+                    <input type="hidden" name="updatedOrderItems[@i].ItemAmount" value="@item.ItemAmount" />
+                </td>
+            </tr>
+            }
+        }
+
+    </tbody>
+</table>

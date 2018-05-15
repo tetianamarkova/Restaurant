@@ -1,0 +1,50 @@
+﻿@model KodisoftTest.Models.Authentification.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col s4 offset-s4">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div>
+                    <h4>Sign up</h4>
+                    <br/>
+                    @Html.ValidationSummary(false)
+
+                    <div>
+                        E-mail
+                        <div>
+                            @Html.EditorFor(model => model.Email)
+                        </div>
+                    </div>
+
+                    <div>
+                        Password
+                        <div>
+                            @Html.EditorFor(model => model.Password)
+                        </div>
+                    </div>
+
+                    <div>
+                        Repeat the password
+                        <div>
+                            @Html.EditorFor(model => model.PasswordConfirm)
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <input type="submit" class="waves-effect waves-light btn" value="Sign up" />
+                        </div>
+                    </div>
+                </div>
+            }
+       </div>
+    </div>
+ </div>

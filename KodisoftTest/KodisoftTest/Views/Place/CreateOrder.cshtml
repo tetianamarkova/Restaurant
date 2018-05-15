@@ -1,0 +1,50 @@
+﻿@*@model KodisoftTest.Models.BizOrderModel*@
+@model KodisoftTest.Models.CreateOrderViewModel
+<form class="col s12" method="post" action="/Place/CreateOrder">
+    <div class="container">
+        <input type="hidden" value="@Model.placeId" name="placeId" />
+        <div class="row" id="title">
+            <div class="input-field col s12 m12">
+                <label id="textForNoOrders">No opened orders</label>
+              </div>
+          </div>
+         <div class="row" id="row-menu-items">
+
+         </div>
+         <div class="row">
+             <div class="input-field col s10">
+                 @Html.DropDownListFor(model => model.SelectedMenuItem, new SelectList(Model.Menu, "ItemId", "ItemName"), new { id= "dropdownMenuItems"})
+             </div>
+                <div class="input-field col s2">
+                    <a id="addItems" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+          </div>
+          <div class="row">
+          </div>
+
+     </div>
+    <input type="submit" class="waves-effect waves-light btn" value="Create" />
+
+</form>
+
+
+<script>
+		$(document).ready(function() {
+			$('select').material_select();
+                     });
+</script>
+
+<script>
+    $('#addItems').click(function () {
+
+        var itemId = $('#dropdownMenuItems').val();
+        var url = '@Html.Raw(@Url.Action("PlaceOpenedOrders", "Place", new { selectedValue = "item", orderId = -1 }))';
+        url = url.replace("item", itemId);
+
+        $.get(url, function (data) {
+
+            $("#row-menu-items").html(data);
+            $('#textForNoOrders').hide();
+        });
+    });
+</script>

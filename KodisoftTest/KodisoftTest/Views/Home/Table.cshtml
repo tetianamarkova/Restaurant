@@ -1,0 +1,49 @@
+﻿@*@model IEnumerable<Kodisoft.DAL.Places>*@
+@model Kodisoft.DAL.Tables
+
+
+
+<div class="row">
+    <div class="col m7">
+        <map id="table_map" name="#tableMap">
+        </map>
+        <image src="/Images/table_map.png" alt="Table map" usemap="#table_map" width="100%" height="100%">
+
+    </div>
+    <div class="col s12 m5" id="tableTitle">
+
+        <nav>
+            <div class="nav-wrapper white" id="navTitle">
+                <a href="#" class="brand-logo center black-text">@{Html.RenderPartial("TableTitle", Model); } Table</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down black-text">
+                    <li>@Html.ActionLink("Back", "Index", null,new { @class = "black-text" })</li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row" id="placesDetailsForTable">
+                @foreach (var item in Model.Places)
+            {
+                    @Html.Action("TableDetails", new { placeId = item.PlaceId })
+                }
+           
+        </div>
+        
+    </div>
+</div>
+<script type="text/javascript">
+
+        $('button').click(function (e) {
+
+            var placeId = $(this).attr('place-id');
+
+                var url = '@Html.Raw(@Url.Action("PlaceDetails", "Place", new { placeId = "XXXmyjavascriptIDXXX" }).Replace("XXXmyjavascriptIDXXX", "' + placeId + '"))'
+                console.log(url);
+                $('#placesDetailsForTable').load(url);
+
+                var url = '@Html.Raw(@Url.Action("PlaceTitle", "Place", new { placeId = "XXXmyjavascriptIDXXX" }).Replace("XXXmyjavascriptIDXXX", "' + placeId + '"))'
+                console.log(url);
+                $('#navTitle').load(url);
+
+    })
+</script>
+

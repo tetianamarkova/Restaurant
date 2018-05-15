@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Kodisoft.DAL.Tables>
+
+<div class="row">
+
+        @Html.Action("TablesCoordinates", "Home")
+
+</div>
+
+<div class="row">
+    <div class="container">
+        <div style="position: relative; width: 960px; height: 540px; background-image: url('/Images/map.png');">
+            @foreach (var table in Model)
+            {
+                string left = table.PositionX + "px";
+                string top = table.PositionY + "px";
+                <a href='@Url.Action("Table", "Home", new { id = table.TableId })' style="position: absolute; left: @left; top: @top;">
+                    <img src='@Url.Content(table.ImagePath)' />
+                </a>
+            }
+        </div>
+    </div>
+   
+</div>
+
+
+<script>
+		$(document).ready(function() {
+			$('select').material_select();
+                     });
+</script>
+
+
+
+

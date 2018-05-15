@@ -1,0 +1,126 @@
+﻿@model KodisoftTest.Models.OrderHistoryModel
+
+@*<form method="post" action="/OrderHistory/OrderHistoryTable">*@
+<div class="container">
+    <div class="row">
+        <h4 class="red-text text-lighten-2">Order History</h4>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <span class="red-text text-lighten-2">Select table:</span>
+            @Html.DropDownListFor(model => model.SelectedTable, new SelectList(Model.tables, "TableId", "TableName"), new { id = "dropdownTable" })
+        </div>
+        <div class="col s4 offset-s4">
+            <div class="row"><span class="red-text text-lighten-2">Select status:</span></div>
+            <div class="row">
+                <input type="checkbox" checked="checked" name="OpenedStatus" id="openedId"><label for="openedId">Opened Orders</label>
+            </div>
+            <div class="row">
+                <input type="checkbox" name="ClosedStatus" id="closedId"><label for="closedId">Closed Orders</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="s3 offset-s9">
+            <input class="waves-effect waves-light btn" type="submit" name="submitButton" id="getHistoryButton" value="Get History" />
+        </div>
+    </div>
+</div>
+@*</form>*@
+<div class="container">
+    <div class="row">
+        <div id="closeOrderDetails" class="col s2 offset-s10" style="display: none;">
+            <button class="btn-floating btn-large waves-effect waves-light" id="closeOrderDetailsButton">X</button>
+        </div>
+    </div>
+    <div class="row" id="historyTable">
+        <div id="orderTable" class="col s12  m12 l12">
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Table</th>
+                        <th>Place</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Order Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.orders)
+                    {
+
+                        <tr>
+                            <td>@order.OrderId</td>
+                            <td>@order.Places.TableId</td>
+                            <td>@order.Places.PlaceName</td>
+                            <td>@order.OrderDate</td>
+                            <td>@order.StatusList.StatusName</td>
+                            <td>
+                                <a href="#" order-id="@order.OrderId" class="getOrderDetailsButton">Order Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="orderDetails" class="col s6 m6 l6" style="display: none;">
+        </div>
+    </div>
+</div>
+
+
+<script>
+		$(document).ready(function() {
+			$('select').material_select();
+		});
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.getOrderDetailsButton').click(function(){
+            $('#orderTable').removeClass("col s12  m12 l12");
+            $('#orderTable').addClass("col s6 m6 l6");
+
+            var orderId = $(this).attr('order-id');
+
+            var url = '@Html.Raw(@Url.Action("OrderDetails", "OrderHistory", new { orderId = "first"}))';
+            url = url.replace("first", orderId);
+
+
+            $.get(url, function (data) {
+                $("#orderDetails").html(data);
+            });
+
+            $('#orderDetails').show();
+            $('#closeOrderDetails').show();
+
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#getHistoryButton').click(function () {
+            var openedStatus = $('#openedId').prop('checked');
+            var closedStatus = $('#closedId').prop('checked');
+            var tableId = $('#dropdownTable').val();
+
+            var url = '@Html.Raw(@Url.Action("OrderHistoryTable", "OrderHistory"))';
+            $.post(url, { OpenedStatus: openedStatus, ClosedStatus: closedStatus, SelectedTable: tableId }, function (data) {
+                $('#historyTable').html(data);
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#closeOrderDetails').click(function () {
+            $('#orderDetails').hide();
+            $('#closeOrderDetails').hide();
+            $('#orderTable').removeClass("col s6  m6 l6");
+            $('#orderTable').addClass("col s12 m12 l12");
+        });
+    });
+</script>

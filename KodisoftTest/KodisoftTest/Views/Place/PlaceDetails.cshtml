@@ -1,0 +1,17 @@
+﻿@model Kodisoft.DAL.Places
+    <div class="section">
+    @{
+        var openedOrder = Model.Orders.ToList().Find(x => x.OrderStatus == 1 || x.OrderStatus == 2 || x.OrderStatus == 3);
+        if (Model.Orders.Count() == 0 | openedOrder == null)
+        {
+            @Html.Action("CreateOrder", "Place", new { placeId = Model.PlaceId })
+
+        }
+        else
+        {
+
+            @Html.Action("GetOrders", "Place", new { placeId = Model.PlaceId })
+
+        }
+    }
+</div>
